@@ -51,41 +51,22 @@ def dfs_path_length(graph, start, end):
     return -1
 def dfs_path_length(graph, start, end):
     """
-    [Previous docstring remains...]
+    Модернизированная функция поиска длины пути DFS
+    Добавлены проверки входных данных и обработка ошибок
     """
-    # Validate input graph
-    if not graph:
-        raise ValueError("Graph cannot be empty")
+    # Валидация входного графа
+    if not graph or not isinstance(graph, dict):
+        raise ValueError("Некорректный формат графа")
     
-    # Check if nodes exist in graph
+    # Проверка существования вершин в графе
     if start not in graph:
-        raise ValueError(f"Start node {start} not found in graph")
+        raise ValueError(f"Стартовая вершина {start} отсутствует в графе")
     if end not in graph:
-        raise ValueError(f"End node {end} not found in graph")
+        raise ValueError(f"Конечная вершина {end} отсутствует в графе")
     
-    # Special case: start == end
+    # Особый случай: начальная и конечная вершины совпадают
     if start == end:
         return 0
-    
-    # DFS implementation with distance tracking
-    visited = set()  # To keep track of visited nodes
-    stack = [(start, 0)]  # Stack stores tuples of (node, distance)
-    
-    while stack:
-        vertex, distance = stack.pop()
-        
-        # Check if we've reached the target
-        if vertex == end:
-            return distance
-            
-        if vertex not in visited:
-            visited.add(vertex)
-            # Add neighbors to stack in reverse order
-            for neighbor in reversed(graph.get(vertex, [])):
-                if neighbor not in visited:
-                    stack.append((neighbor, distance + 1))
-    
-    return -1  # Indicates no path found
 
 
 if __name__ == "__main__":
