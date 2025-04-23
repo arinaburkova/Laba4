@@ -49,7 +49,43 @@ def dfs_path_length(graph, start, end):
                     stack.append((neighbor, distance + 1))
     
     return -1
-
+def dfs_path_length(graph, start, end):
+    """
+    [Previous docstring remains...]
+    """
+    # Validate input graph
+    if not graph:
+        raise ValueError("Graph cannot be empty")
+    
+    # Check if nodes exist in graph
+    if start not in graph:
+        raise ValueError(f"Start node {start} not found in graph")
+    if end not in graph:
+        raise ValueError(f"End node {end} not found in graph")
+    
+    # Special case: start == end
+    if start == end:
+        return 0
+    
+    # DFS implementation with distance tracking
+    visited = set()  # To keep track of visited nodes
+    stack = [(start, 0)]  # Stack stores tuples of (node, distance)
+    
+    while stack:
+        vertex, distance = stack.pop()
+        
+        # Check if we've reached the target
+        if vertex == end:
+            return distance
+            
+        if vertex not in visited:
+            visited.add(vertex)
+            # Add neighbors to stack in reverse order
+            for neighbor in reversed(graph.get(vertex, [])):
+                if neighbor not in visited:
+                    stack.append((neighbor, distance + 1))
+    
+    return -1  # Indicates no path found
 
 
 if __name__ == "__main__":
