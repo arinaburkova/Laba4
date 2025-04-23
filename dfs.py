@@ -20,7 +20,7 @@ def dfs(graph, start):
 
 
 def build_graph(edges):
-   
+
     graph = {}
     for u, v in edges:
         if u not in graph:
