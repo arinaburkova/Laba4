@@ -29,6 +29,26 @@ def build_graph(edges):
         graph[v].append(u)
     return graph
 
+def dfs_path_length(graph, start, end):
+  
+
+    if start == end:
+        return 0
+    
+    visited = set()
+    stack = [(start, 0)]  # (vertex, distance)
+    
+    while stack:
+        vertex, distance = stack.pop()
+        if vertex == end:
+            return distance
+        if vertex not in visited:
+            visited.add(vertex)
+            for neighbor in reversed(graph.get(vertex, [])):
+                if neighbor not in visited:
+                    stack.append((neighbor, distance + 1))
+    
+    return -1
 
 
 
