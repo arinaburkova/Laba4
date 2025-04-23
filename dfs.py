@@ -49,7 +49,31 @@ def dfs_path_length(graph, start, end):
                     stack.append((neighbor, distance + 1))
     
     return -1
+def dfs_path_length(graph, start, end):
 
+    if not graph:
+        raise ValueError("Graph cannot be empty")
+    
+    if start not in graph or end not in graph:
+        raise ValueError("Start or end node not in graph")
+    
+    if start == end:
+        return 0
+    
+    visited = set()
+    stack = [(start, 0)]
+    
+    while stack:
+        vertex, distance = stack.pop()
+        if vertex == end:
+            return distance
+        if vertex not in visited:
+            visited.add(vertex)
+            for neighbor in reversed(graph.get(vertex, [])):
+                if neighbor not in visited:
+                    stack.append((neighbor, distance + 1))
+    
+    return -1
 
 
 if __name__ == "__main__":
